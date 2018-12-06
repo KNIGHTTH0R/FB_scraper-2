@@ -15,7 +15,46 @@ Facebook API 因2018年3月的個資事件而導致關閉，因此不再像以�
 ## 程式碼運作流程
 
 ## 使用方法
+-----
+Server:
+  google cloud compute engine f1 micro (os: Ubuntu 18.04.1 LTS)
+  
+In shell run:
 
+sudo apt-get update<br>
+
+
+### install chrome and chromedriver
+** Fail to let firefox work, so I use chrome **
+ref:　https://zhuanlan.zhihu.com/p/36670753
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo apt-get -f install
+
+mkdir driver && cd driver
+wget https://chromedriver.storage.googleapis.com/2.38/chromedriver_linux64.zip
+sudo apt-get install unzip
+unzip chromedriver_linux64.zip
+
+
+
+## python setting ##
+sudo apt-get install python3-pip<br>
+pip3 install virtualenv<br>
+virtualenv -p python3 scraper_env<br>
+git clone https://github.com/even311379/FB_scraper/
+source scraper_env/bin/activate
+pip install -r FB_scraper/requirements.txt
+
+** The response time in f1 micro is so long, it will get timeout error **
+** Or page crash!! Maybe I should use a more decent server to run this script! **
+
+### edit crontab
+crontab -e
+(If this is your first time to run it, it will ask you to choose a default editor. And then )
+add the following script in the end of that file
+00 04 * * * /home/[YOUR USER NAME]/scraper_env/bin/python /home/[YOUR USER NAME]/FB_scraper/FB_spider_Scraper.py
 
 ## 延伸應用
 
